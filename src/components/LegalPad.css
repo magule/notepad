@@ -1,0 +1,486 @@
+.legal-pad-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background: #FFEF83;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.header {
+    background-color: #775646;
+    background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px dotted rgba(255, 255, 255, 0.2);
+    position: relative;
+    box-shadow: inset 0 -10px 20px -10px rgba(0, 0, 0, 0.3);
+    transition: background-image 0.3s ease;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(44, 44, 44, 0.3),
+        rgba(44, 44, 44, 0.1)
+    );
+    pointer-events: none;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFEF83;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    font-family: inherit;
+}
+
+.logo span {
+    color: white;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.action-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #FFEF83;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    backdrop-filter: blur(1px);
+}
+
+.action-button:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.action-button:active {
+    transform: translateY(0);
+}
+
+.action-button.matrix-theme {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(135, 206, 235, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-button.matrix-theme::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: radial-gradient(white, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.action-button.matrix-theme:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(135, 206, 235, 0.5);
+}
+
+.action-button.matrix-theme:hover::before {
+    opacity: 0.1;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.share-modal {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2D3436;
+    font-family: inherit;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.url-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.share-url {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: #666;
+    background: #f8f8f8;
+}
+
+.copy-url-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #775646;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.copy-url-button:hover {
+    background: #614738;
+}
+
+.share-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #ff6b6b;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', Courier, monospace;
+}
+
+.share-button:hover {
+    background: #ff5252;
+}
+
+.legal-pad {
+    flex: 1;
+    position: relative;
+    padding: 31px 60px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.legal-pad::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ff6b6b;
+    opacity: 0.6;
+}
+
+.legal-pad::after {
+    content: '';
+    position: absolute;
+    left: 45px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ff6b6b;
+    opacity: 0.6;
+}
+
+.lines {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.lines::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+    background-size: 100% 31px;
+    background-position: 0 31px;
+}
+
+.notepad {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: transparent;
+    resize: none;
+    font-size: 18px;
+    line-height: 31px;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+    color: #1a1a1a;
+    font-family: Courier, 'Courier New', 'IBM Plex Mono', monospace;
+    font-weight: 550;
+    letter-spacing: -0.2px;
+    overflow-y: auto;
+}
+
+.notepad:focus {
+    outline: none;
+}
+
+.notepad::placeholder {
+    color: rgba(0, 0, 0, 0.25);
+    font-weight: 600;
+}
+
+.char-count-bottom {
+    position: absolute;
+    bottom: 16px;
+    right: 24px;
+    padding: 8px 16px;
+    background-color: rgba(119, 86, 70, 0.9);
+    color: #FFEF83;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 3;
+}
+
+.character-count {
+    display: none;
+}
+
+.save-status {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 8px 16px;
+    background-color: #775646;
+    color: #FFEF83;
+    border-radius: 6px;
+    opacity: 0;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    font-weight: 600;
+    transform: translateY(10px);
+    font-family: inherit;
+}
+
+.save-status.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.footer {
+    padding: 10px;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+    background: white;
+}
+
+.theme-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #FFEF83;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    backdrop-filter: blur(1px);
+    margin-left: 12px;
+}
+
+.theme-button:hover {
+    background: rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.theme-button:active {
+    transform: translateY(0);
+}
+
+.theme-button svg {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+}
+
+.theme-number {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 14px;
+    text-align: center;
+}
+
+/* Update header styles for matrix theme */
+.header.matrix-theme {
+    background-color: #0a0a2a;
+    border-bottom: 3px dotted rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.7; }
+}
+
+.header.matrix-theme::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(2px 2px at 10% 10%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 25% 30%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 40% 15%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 55% 25%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 70% 35%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 85% 15%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 95% 25%, white 50%, transparent 50%),
+        radial-gradient(3px 3px at 15% 45%, rgba(255,255,255,0.8) 50%, transparent 50%),
+        radial-gradient(3px 3px at 35% 65%, rgba(255,255,255,0.8) 50%, transparent 50%),
+        radial-gradient(3px 3px at 65% 45%, rgba(255,255,255,0.8) 50%, transparent 50%),
+        radial-gradient(3px 3px at 85% 55%, rgba(255,255,255,0.8) 50%, transparent 50%);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.header.matrix-theme .logo {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(135, 206, 235, 0.8);
+}
+
+.header.matrix-theme .logo span {
+    color: #87CEEB;
+}
+
+.header.matrix-theme::before {
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 42, 0.9),
+        rgba(10, 10, 42, 0.7)
+    );
+    z-index: 1;
+}
+
+/* Add stars to the notepad background */
+.legal-pad.space-theme {
+    background-color: #0a0a2a;
+}
+
+.legal-pad.space-theme::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(2px 2px at 15% 15%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 35% 25%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 55% 15%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 75% 35%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 25% 55%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 45% 45%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 65% 65%, white 50%, transparent 50%),
+        radial-gradient(2px 2px at 85% 75%, white 50%, transparent 50%),
+        radial-gradient(3px 3px at 30% 85%, rgba(255,255,255,0.8) 50%, transparent 50%),
+        radial-gradient(3px 3px at 50% 95%, rgba(255,255,255,0.8) 50%, transparent 50%),
+        radial-gradient(3px 3px at 70% 85%, rgba(255,255,255,0.8) 50%, transparent 50%);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.legal-pad.space-theme .lines::after {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+.legal-pad.space-theme .notepad {
+    color: white;
+}
+
+.legal-pad.space-theme .notepad::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.legal-pad.space-theme::after {
+    background-color: rgba(255, 255, 255, 0.1);
+} 
